@@ -21,7 +21,7 @@
     * [Finding invalid data](#finding-invalid-data)
   * [Review](#review)
     * [Glossary : Course-4_Module-1](#glossary--course-4_module-1)
-    * [Qwiklabs Assessment : Debug Python Scripts](#qwiklabs-assessment--debug-python-scripts)
+    * [Qwiklab Assessment : Debug Python Scripts](#qwiklab-assessment--debug-python-scripts)
 * [MODULE 2 : Slowness](#module-2--slowness)
   * [Understanding Slowness](#understanding-slowness)
     * [Introduction to Slowness](#introduction-to-slowness)
@@ -45,7 +45,7 @@
     * [More about complex slow systems](#more-about-complex-slow-systems)
   * [Review](#review-1)
     * [Glossary : Course-4_Module-2](#glossary--course-4_module-2)
-    * [Qwiklabs Assessment : Performance tuning in Python scripts](#qwiklabs-assessment--performance-tuning-in-python-scripts)
+    * [Qwiklab Assessment : Performance tuning in Python scripts](#qwiklab-assessment--performance-tuning-in-python-scripts)
 * [MODULE 3 : Crashing Programs](#module-3--crashing-programs)
   * [Why Programs Crash](#why-programs-crash)
     * [Introduction to Crashing Programs](#introduction-to-crashing-programs)
@@ -57,7 +57,7 @@
   * [Code that Crashes](#code-that-crashes)
     * [Accessing invalid memory](#accessing-invalid-memory)
     * [Unhandled errors and exceptions](#unhandled-errors-and-exceptions)
-    * [Fixing someone else's code](#fixing-someone-elses-code)
+    * [Fixing someone else code](#fixing-someone-else-code)
     * [Debugging a segmentation fault](#debugging-a-segmentation-fault)
     * [Debugging a Python crash](#debugging-a-python-crash)
     * [Debugging with print](#debugging-with-print)
@@ -74,7 +74,7 @@
     * [Writing effective postmortems](#writing-effective-postmortems)
   * [Review](#review-2)
     * [Glossary : Course-4_Module-3](#glossary--course-4_module-3)
-    * [Qwiklabs Assessment : Fix errors in Python scripts](#qwiklabs-assessment--fix-errors-in-python-scripts)
+    * [Qwiklab Assessment : Fix errors in Python scripts](#qwiklab-assessment--fix-errors-in-python-scripts)
 * [MODULE 4 : Managing Resources](#module-4--managing-resources)
   * [Managing computer resources](#managing-computer-resources)
     * [Introduction on Managing Resources](#introduction-on-managing-resources)
@@ -99,7 +99,7 @@
     * [More about preventing future breakage](#more-about-preventing-future-breakage)
   * [Review](#review-3)
     * [Glossary : Course-4_Module-4](#glossary--course-4_module-4)
-    * [Qwiklabs Assessment : Debug and Solve Software Problems](#qwiklabs-assessment--debug-and-solve-software-problems)
+    * [Qwiklab Assessment : Debug and Solve Software Problems](#qwiklab-assessment--debug-and-solve-software-problems)
     * [IT skills in action](#it-skills-in-action)
   * [Interviewing](#interviewing)
     * [Getting interviews through networking](#getting-interviews-through-networking)
@@ -115,224 +115,252 @@
 
 # MODULE 1 : Troubleshooting Concepts
 
-##  Introduction
+## Introduction
+
 - Different flavors of technical problems
-  - crashing unexpectedly
-  - getting stuck when it should be processing information
-  - make your script run faster, use less memory, or transmit less data over the network
-  - overall system isn't running as expected
-- We'll learn how to solve any technical problem 
+    - crashing unexpectedly
+    - getting stuck when it should be processing information
+    - make your script run faster, use less memory, or transmit fewer(less) data over the network
+    - overall system isn't running as expected
+- We'll learn how to solve any technical problem
+- Prerequisites for this course:
+    - Operating Systems: file systems, processes, log files
+    - Computer hardware: CPU, RAM, disk, graphic, and Network Cards
+    - Basic Networking: network connections and network bandwidth
 
-##  Introduction to Debugging
+## Introduction to Debugging
 
-###  Debugging
+- Essential debugging techniques
+    - basic process that we can use for tackling any technical problem
+    - different ways we can approach understanding
+        - what's going on and
+        - finding the root cause of an issue
+        - including a process called binary search to troubleshoot problems.
+    - how to apply techniques (reusable) to solve
+- Finally, you'll be able to apply techniques to solve a technical issue
 
-###  Problem solving steps
+### Debugging
 
-###  Silently crashing application
+- Troubleshooting : The process of identifying, analyzing, and solving problems
+    - When we're fixing problems in the system running the application
+- Problems may be caused by hardware, OS, applications running on the computer, or environment and configuration of the
+  software
+- Debugging : The process fo identifying, analyzing, and removing bugs in a system
+    - When we're fixing the bugs in the actual code of the application
+- Tools to get more information about the system
+    - `tcpdump` and `Wireshark` : show ongoing network connections
+    - `ps`, `top` or `free` : show number and types of resources used in the system
+    - `strace` : look at system calls made by a program
+    - `ltrace` : look at library call made by the software
+- Debuggers : Let us follow the code line by line, inspect changes in variable assignments, interrupt the program when a
+  specific condition is met, and more
 
-##  Understanding Problem
+### Problem solving steps
 
-###  It Doesn't Work
+### Silently crashing application
 
-###  Creating a Reproduction Case
+## Understanding Problem
 
-###  Finding the Root Cause
+### It Doesn't Work
 
-###  Dealing with Intermittent Issues
+### Creating a Reproduction Case
 
-###  Intermittently Failing Script
+### Finding the Root Cause
 
-##  Binary Searching a Problem
+### Dealing with Intermittent Issues
 
-###  Binary Search
+### Intermittently Failing Script
 
-###  Linear and Binary
+## Binary Searching a Problem
 
-###  Applying binary search in troubleshooting
+### Binary Search
 
-###  Finding invalid data
+### Linear and Binary
 
-##  Review
+### Applying binary search in troubleshooting
 
-###  Glossary : Course-4_Module-1
+### Finding invalid data
 
-###  Qwiklabs Assessment : Debug Python Scripts
+## Review
+
+### Glossary : Course-4_Module-1
+
+### Qwiklab Assessment : Debug Python Scripts
 
 # MODULE 2 : Slowness
 
-##  Understanding Slowness
+## Understanding Slowness
 
-###  Introduction to Slowness
+### Introduction to Slowness
 
-###  Why is my computer slow?
+### Why is my computer slow?
 
-###  How computers use resources
+### How computers use resources
 
-###  Possible causes of slowness
+### Possible causes of slowness
 
-###  Slow web server
+### Slow web server
 
-###  Monitoring tools
+### Monitoring tools
 
-##  Slow Code
+## Slow Code
 
-###  Writing efficient code
+### Writing efficient code
 
-###  Using the right data structures
+### Using the right data structures
 
-###  Expensive loops
+### Expensive loops
 
-###  Keeping local results
+### Keeping local results
 
-###  Slow script with expensive loop
+### Slow script with expensive loop
 
-###  More about improving our code
+### More about improving our code
 
-##  When Slowness Problems Get Complex
+## When Slowness Problems Get Complex
 
-###  Parallelizing operations
+### Parallelizing operations
 
-###  Slowly growing in complexity
+### Slowly growing in complexity
 
-###  Dealing with complex slow systems
+### Dealing with complex slow systems
 
-###  Using threads to make things go faster
+### Using threads to make things go faster
 
-###  More about complex slow systems
+### More about complex slow systems
 
-##  Review
+## Review
 
-###  Glossary : Course-4_Module-2
+### Glossary : Course-4_Module-2
 
-###  Qwiklabs Assessment : Performance tuning in Python scripts
+### Qwiklab Assessment : Performance tuning in Python scripts
 
 # MODULE 3 : Crashing Programs
 
-##  Why Programs Crash
+## Why Programs Crash
 
-###  Introduction to Crashing Programs
+### Introduction to Crashing Programs
 
-###  Systems that Crash
+### Systems that Crash
 
-###  Understanding crashing applications
+### Understanding crashing applications
 
-###  What to do when you can't fix the program?
+### What to do when you can't fix the program?
 
-###  Internal server error
+### Internal server error
 
-###  Resources for understanding crashes
+### Resources for understanding crashes
 
-##  Code that Crashes
+## Code that Crashes
 
-###  Accessing invalid memory
+### Accessing invalid memory
 
-###  Unhandled errors and exceptions
+### Unhandled errors and exceptions
 
-###  Fixing someone else's code
+### Fixing someone else code
 
-###  Debugging a segmentation fault
+### Debugging a segmentation fault
 
-###  Debugging a Python crash
+### Debugging a Python crash
 
-###  Debugging with print
+### Debugging with print
 
-###  Debugging with assert
+### Debugging with assert
 
-###  Try and catch debugging
+### Try and catch debugging
 
-###  Python logging module
+### Python logging module
 
-###  Python debugging with pdb
+### Python debugging with pdb
 
-###  Debugging/breakpoints in VS Code
+### Debugging/breakpoints in VS Code
 
-###  AI infused debugging and paired programming
+### AI infused debugging and paired programming
 
-###  Resources for debugging crashes
+### Resources for debugging crashes
 
-##  Handling Bigger incidents
+## Handling Bigger incidents
 
-###  Crashes in complex systems
+### Crashes in complex systems
 
-###  Communication and documentation during incidents
+### Communication and documentation during incidents
 
-###  Writing effective postmortems
+### Writing effective postmortems
 
-##  Review
+## Review
 
-###  Glossary : Course-4_Module-3
+### Glossary : Course-4_Module-3
 
-###  Qwiklabs Assessment : Fix errors in Python scripts
+### Qwiklab Assessment : Fix errors in Python scripts
 
 # MODULE 4 : Managing Resources
 
-##  Managing computer resources
+## Managing computer resources
 
-###  Introduction on Managing Resources
+### Introduction on Managing Resources
 
-###  Memory leaks and how to prevent them
+### Memory leaks and how to prevent them
 
-###  Managing disk space
+### Managing disk space
 
-###  Network saturation
+### Network saturation
 
-###  Dealing with memory leaks
+### Dealing with memory leaks
 
-###  More about managing resources
+### More about managing resources
 
-##  Managing our time
+## Managing our time
 
-###  Getting to the important tasks
+### Getting to the important tasks
 
-###  Prioritizing tasks
+### Prioritizing tasks
 
-###  Estimating the Time tasks will take
+### Estimating the Time tasks will take
 
-###  Communicating expectations
+### Communicating expectations
 
-###  More about making the best use of your time
+### More about making the best use of your time
 
-##  Making our future live easier
+## Making our future live easier
 
-###  Dealing with Hard Problems
+### Dealing with Hard Problems
 
-###  Proactive Practices
+### Proactive Practices
 
-###  Planning Future Resource Usage
+### Planning Future Resource Usage
 
-###  Change management in virtualized environments
+### Change management in virtualized environments
 
-###  Containerized Applications : Docker
+### Containerized Applications : Docker
 
-###  Preventing Future Problems
+### Preventing Future Problems
 
-###  More about preventing future breakage
+### More about preventing future breakage
 
-##  Review
+## Review
 
-###  Glossary : Course-4_Module-4
+### Glossary : Course-4_Module-4
 
-###  Qwiklabs Assessment : Debug and Solve Software Problems
+### Qwiklab Assessment : Debug and Solve Software Problems
 
-###  IT skills in action
+### IT skills in action
 
-##  Interviewing
+## Interviewing
 
-###  Getting interviews through networking
+### Getting interviews through networking
 
-###  The interview process
+### The interview process
 
-###  Interviewing at different type of companies
+### Interviewing at different type of companies
 
-###  Developing an Elevator Pitch
+### Developing an Elevator Pitch
 
-###  Asking the interviewer questions
+### Asking the interviewer questions
 
-###  Answer questions with the STAR method
+### Answer questions with the STAR method
 
-###  Interview warmup
+### Interview warmup
 
-###  Negotiating the contract
+### Negotiating the contract
 
-##  Wrap up
+## Wrap up
