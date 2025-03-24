@@ -1,2 +1,3 @@
-# TroubleshootingandDebuggingTechniques
-G-IT-A-Python_Troubleshooting and Debugging Techniques
+# Troubleshooting and Debugging Techniques
+
+## Goggle IT Automation with Python
