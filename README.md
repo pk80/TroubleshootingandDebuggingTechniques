@@ -336,25 +336,111 @@ already learned to get information, find the root cause, and remediate the probl
 
 ### Slow web server
 
+```text
+# figure out how slow website is responding
+ab -n 500 <website>/
+...
+# ab stands for Apache Benchmark tool
+# 500 is the number of requests made to website
+```
+
+```text
+# connecting to the web server
+ssh webserver
+password:.....
+.....
+
+# check for anything suspicious
+top
+
+# start a process with different priority : nice
+nice 
+# change priority of a process that's already running : use renice
+for pid in $(pidof COMMAND); do renice 19 $pid; done
+```
+
+```text
+ps ax | less
+```
+
+```text
+for pid in $(pidof COMMAND); do while kill -CONT $pid; do sleep 1; done; done
+ab n 500 <website>/
+```
+
 ### Monitoring tools
 
 ## Slow Code
 
 ### Writing efficient code
 
+- readable, easy to write & understand
+- clear code and try to make it run faster
+- trying to optimize every second out of a script is probably not worth your time
+- if we want our code to finish faster, we need to make our computer do less work
+- profiler : tool that measures the resources that our code is using, giving us a better understanding of what's going
+  on
+    - gprof : to analyse c program
+    - cProfile : to analyse python program (to count function calls)
+- expensive action : those that can take a long time to complete
+    - include parsing a file, reading data over network or iterating through whole list
+
 ### Using the right data structures
+
+- Lists, Dictionaries, Tuples, and Sets are important data structures in python
+- Lists : sequence of elements.
+    - we can add/remove/modify them
+    - we can iterate through the whole list to operate on each of the elements
+    - it's called as ArrayList in java, Vector in C++, Array in Ruby and Slice in Go
+    - This takes more time to find something in the list if it is too long
+    - if you need to access elements by position, or will always iterate through all the elements, use a list to them.
+- Dictionaries : store key-value pairs.
+    - we can add data by associating value to a key
+    - we can retrieve a value by looking up a specific key
+    - it's called as HashMap in Java, Unordered Map in C++, Hash in Ruby and Map in Go
+    - superfast for looking up for keys in just for one operation
+    - if you need to look up the element using a key, use a dictionary
+- think twice about creating copies of structures that we have in memory (maybe big)
 
 ### Expensive loops
 
+- loops make our computer do things repetitively
+- if you do an expensive operation inside the loop, you multiply the time it takes to do the expensive operation by the
+  amount of time you repeat the loop.
+- it is better to do expensive operations outside the loop
+- make sure that the list of elements that you're iterating through is only as long as you really need it to be
+- remember to break out of the loop once you've finished what you were looking for
+
 ### Keeping local results
 
+- avoid expensive operations by creating a local cache
+- remember to update cache (once per day)
+- sometimes creating a variable also suffice this purpose
+
 ### Slow script with expensive loop
+
+- different values in the print on how long it took to execute a command by calling it with `time`
+    - Real : the amount of actual time that it took to execute the command
+        - this is sometimes called as wall-clock time
+    - User : the time spent doing operations in the user space
+    - Sys : the time spent doing system-level operations
+- user profilers to get some data what's going on
+    - `pprofile3 -f callgrind -o profile.out <command>`
+        - -f flag is to use callgrind file format
+    - `kcachegrind <profile.out>` to look at the contents, a graphical interface for looking into these files.
 
 ### More about improving our code
 
 ## When Slowness Problems Get Complex
 
 ### Parallelizing operations
+
+- do operations in parallels
+- `concurrency` is how we write programs that do operations in parallel
+- best way to do this is to split them across different processes
+- good balance of different work loads
+- Threads : let us run parallel tasks inside a process
+    - Asyncio module in python does this
 
 ### Slowly growing in complexity
 
