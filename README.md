@@ -446,7 +446,16 @@ ab n 500 <website>/
 
 ### Dealing with complex slow systems
 
+- for dynamic website, we might try adding caching
+- for too many requests for one machine, you'll need to distribute the load across more computers. For this, reorganize
+  the code so that it's capable of running in a distributed system instead of on a single computer.
+
 ### Using threads to make things go faster
+
+- Executor : is the process that's in charge of distributing the work among the different workers
+- introduce `form cncurrent import future` module :
+    - provides a couple of different executors; one for using threads and another for using process
+-
 
 ### More about complex slow systems
 
@@ -454,7 +463,44 @@ ab n 500 <website>/
 
 ### Glossary : Course-4_Module-2
 
+**Terms and definitions from Course 4, Module 2**
+
+- **Activity Monitor**: macOS tool that shows what's using the most CPU, memory, energy, disk, or network
+- **Cache**: This stores data in a form that's faster to access than its original form
+- **Executor**: This is the process that's in charge of distributing the work among the different workers
+- **Expensive actions**: Actions that can take a long time to complete
+- **Futures**: A module provides a couple of different executors, one for using threads and the other one for using
+  processes
+- **Lists**: Sequences of elements
+- **Memory leak**: This happens when a chunk of memory that's no longer needed is not released
+- **Profiler**: A tool that measures the resources the code is using to see how the memory is allocated and how the time
+  is spent
+- **Real time**: The amount of actual time that it took to execute the command
+- **Resource Monitor (or Performance Monitor)**: Windows OS tool that shows what's using the most CPU, memory, energy,
+  disk, or network
+- **Sys time**: The time spent doing system level operations
+- **Threads**: Run parallel tasks inside a process
+- **User time**: The time spent doing operations in the user space
+
 ### Qwiklab Assessment : Performance tuning in Python scripts
+
+Imagine one of your colleagues has written a Python script that's failing to run correctly. They're asking for your help
+to debug it. In this lab, you'll look into why the script is crashing and apply the problem-solving steps that we've
+already learned to get information, find the root cause, and remediate the problem.
+
+You're an IT administrator for a media production company that uses Network-Attached Storage (NAS) to store all data
+generated daily (e.g., videos, photos). One of your daily tasks is to back up the data in the production NAS (mounted at
+/data/prod on the server) to the backup NAS (mounted at /data/prod_backup on the server). A former member of the team
+developed a Python script (full path /scripts/dailysync.py) that backs up data daily. But recently, there's been a lot
+of data generated and the script isn't catching up to the speed. As a result, the backup process now takes more than 20
+hours to finish, which isn't efficient at all for a daily backup.
+
+**What you'll do**
+
+- Identify what limits the system performance: I/O, Network, CPU, or Memory
+- Use rsync command instead of cp to transfer data
+- Get system standard output and manipulate the output
+- Find differences between threading and multiprocessing
 
 # MODULE 3 : Crashing Programs
 
@@ -462,13 +508,56 @@ ab n 500 <website>/
 
 ### Introduction to Crashing Programs
 
+- causes of crashes
+    - software ran into unexpected situation, a state that developer didn't anticipate
+        - could be by hardware problem, like a broken ramjet
+        - could be a bug in some part of the code
+        - could be an issue in the overall system(program expecting a library)
+
 ### Systems that Crash
+
+- look at the logs
+- try to reproduce the problem
+- check if this happens reliably (do all fail/is it confined to one specific)
+- check if it from application, any other application or the whole system
+- check for ram or hard drives age
+- check for heat generation in the system
+- check for OS issues
 
 ### Understanding crashing applications
 
+- look for logs for better understanding (console app in macOS)
+- search for the error if not understood
+- try getting more info from debug logging, enable it from setting in config file
+- tools help
+    - strace(linux), dtruss(macOS), process monitor(windows)
+- check for configuration changes
+- reproduction case
+- To find teh root cause of a crashing application,
+    - we'll want to look at all available logs,
+    - figer out what changed
+    - trace the system/library calls the program makes
+    - and create the smallest possible reproduction case
+
 ### What to do when you can't fix the program?
 
+- work around the problem to avoid the crash
+- write a wrapper:
+    - a function / program that provides a compatibility layer between two functions or programs, so they can work well
+      together
+- check for system environment where it is working well
+    - for instance run in virtual environment / container
+- watchdog:
+    - a program that checks whether a program is running and, when it's not, starts the program again
+    - a script running in the background
+- Answer these questions for developers to figure out what's wrong
+  - what were you trying to do?
+  - what were the steps you followed?
+  - what did you expect to happen?
+  - what was the actual outcome?
+
 ### Internal server error
+- `sudo netstat -nlp | grep :80` command
 
 ### Resources for understanding crashes
 
