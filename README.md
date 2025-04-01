@@ -2,79 +2,6 @@
 
 <!-- TOC -->
 * [Troubleshooting and Debugging Techniques](#troubleshooting-and-debugging-techniques)
-* [MODULE 1 : Troubleshooting Concepts](#module-1--troubleshooting-concepts)
-  * [Introduction](#introduction)
-  * [Introduction to Debugging](#introduction-to-debugging)
-    * [Debugging](#debugging)
-    * [Problem solving steps](#problem-solving-steps)
-    * [Silently crashing application](#silently-crashing-application)
-  * [Understanding Problem](#understanding-problem)
-    * [It Doesn't Work](#it-doesnt-work)
-    * [Creating a Reproduction Case](#creating-a-reproduction-case)
-    * [Finding the Root Cause](#finding-the-root-cause)
-    * [Dealing with Intermittent Issues](#dealing-with-intermittent-issues)
-    * [Intermittently Failing Script](#intermittently-failing-script)
-  * [Binary Searching a Problem](#binary-searching-a-problem)
-    * [Binary Search](#binary-search)
-    * [Linear and Binary](#linear-and-binary)
-    * [Applying binary search in troubleshooting](#applying-binary-search-in-troubleshooting)
-    * [Finding invalid data](#finding-invalid-data)
-  * [Review](#review)
-    * [Glossary : Course-4_Module-1](#glossary--course-4_module-1)
-    * [Qwiklabs Assessment : Debug Python Scripts](#qwiklabs-assessment--debug-python-scripts)
-* [MODULE 2 : Slowness](#module-2--slowness)
-  * [Understanding Slowness](#understanding-slowness)
-    * [Introduction to Slowness](#introduction-to-slowness)
-    * [Why is my computer slow?](#why-is-my-computer-slow)
-    * [How computers use resources](#how-computers-use-resources)
-    * [Possible causes of slowness](#possible-causes-of-slowness)
-    * [Slow web server](#slow-web-server)
-    * [Monitoring tools](#monitoring-tools)
-  * [Slow Code](#slow-code)
-    * [Writing efficient code](#writing-efficient-code)
-    * [Using the right data structures](#using-the-right-data-structures)
-    * [Expensive loops](#expensive-loops)
-    * [Keeping local results](#keeping-local-results)
-    * [Slow script with expensive loop](#slow-script-with-expensive-loop)
-    * [More about improving our code](#more-about-improving-our-code)
-  * [When Slowness Problems Get Complex](#when-slowness-problems-get-complex)
-    * [Parallelizing operations](#parallelizing-operations)
-    * [Slowly growing in complexity](#slowly-growing-in-complexity)
-    * [Dealing with complex slow systems](#dealing-with-complex-slow-systems)
-    * [Using threads to make things go faster](#using-threads-to-make-things-go-faster)
-    * [More about complex slow systems](#more-about-complex-slow-systems)
-  * [Review](#review-1)
-    * [Glossary : Course-4_Module-2](#glossary--course-4_module-2)
-    * [Qwiklabs Assessment : Performance tuning in Python scripts](#qwiklabs-assessment--performance-tuning-in-python-scripts)
-* [MODULE 3 : Crashing Programs](#module-3--crashing-programs)
-  * [Why Programs Crash](#why-programs-crash)
-    * [Introduction to Crashing Programs](#introduction-to-crashing-programs)
-    * [Systems that Crash](#systems-that-crash)
-    * [Understanding crashing applications](#understanding-crashing-applications)
-    * [What to do when you can't fix the program?](#what-to-do-when-you-cant-fix-the-program)
-    * [Internal server error](#internal-server-error)
-    * [Resources for understanding crashes](#resources-for-understanding-crashes)
-  * [Code that Crashes](#code-that-crashes)
-    * [Accessing invalid memory](#accessing-invalid-memory)
-    * [Unhandled errors and exceptions](#unhandled-errors-and-exceptions)
-    * [Fixing someone else's code](#fixing-someone-elses-code)
-    * [Debugging a segmentation fault](#debugging-a-segmentation-fault)
-    * [Debugging a Python crash](#debugging-a-python-crash)
-    * [Debugging with print](#debugging-with-print)
-    * [Debugging with assert](#debugging-with-assert)
-    * [Try and catch debugging](#try-and-catch-debugging)
-    * [Python logging module](#python-logging-module)
-    * [Python debugging with pdb](#python-debugging-with-pdb)
-    * [Debugging/breakpoints in VS Code](#debuggingbreakpoints-in-vs-code)
-    * [AI infused debugging and paired programming](#ai-infused-debugging-and-paired-programming)
-    * [Resources for debugging crashes](#resources-for-debugging-crashes)
-  * [Handling Bigger incidents](#handling-bigger-incidents)
-    * [Crashes in complex systems](#crashes-in-complex-systems)
-    * [Communication and documentation during incidents](#communication-and-documentation-during-incidents)
-    * [Writing effective postmortems](#writing-effective-postmortems)
-  * [Review](#review-2)
-    * [Glossary : Course-4_Module-3](#glossary--course-4_module-3)
-    * [Qwiklabs Assessment : Fix errors in Python scripts](#qwiklabs-assessment--fix-errors-in-python-scripts)
 * [MODULE 4 : Managing Resources](#module-4--managing-resources)
   * [Managing computer resources](#managing-computer-resources)
     * [Introduction on Managing Resources](#introduction-on-managing-resources)
@@ -97,7 +24,7 @@
     * [Containerized Applications : Docker](#containerized-applications--docker)
     * [Preventing Future Problems](#preventing-future-problems)
     * [More about preventing future breakage](#more-about-preventing-future-breakage)
-  * [Review](#review-3)
+  * [Review](#review)
     * [Glossary : Course-4_Module-4](#glossary--course-4_module-4)
     * [Qwiklabs Assessment : Debug and Solve Software Problems](#qwiklabs-assessment--debug-and-solve-software-problems)
     * [IT skills in action](#it-skills-in-action)
@@ -113,226 +40,81 @@
   * [Wrap up](#wrap-up)
 <!-- TOC -->
 
-# MODULE 1 : Troubleshooting Concepts
-
-##  Introduction
-- Different flavors of technical problems
-  - crashing unexpectedly
-  - getting stuck when it should be processing information
-  - make your script run faster, use less memory, or transmit less data over the network
-  - overall system isn't running as expected
-- We'll learn how to solve any technical problem 
-
-##  Introduction to Debugging
-
-###  Debugging
-
-###  Problem solving steps
-
-###  Silently crashing application
-
-##  Understanding Problem
-
-###  It Doesn't Work
-
-###  Creating a Reproduction Case
-
-###  Finding the Root Cause
-
-###  Dealing with Intermittent Issues
-
-###  Intermittently Failing Script
-
-##  Binary Searching a Problem
-
-###  Binary Search
-
-###  Linear and Binary
-
-###  Applying binary search in troubleshooting
-
-###  Finding invalid data
-
-##  Review
-
-###  Glossary : Course-4_Module-1
-
-###  Qwiklabs Assessment : Debug Python Scripts
-
-# MODULE 2 : Slowness
-
-##  Understanding Slowness
-
-###  Introduction to Slowness
-
-###  Why is my computer slow?
-
-###  How computers use resources
-
-###  Possible causes of slowness
-
-###  Slow web server
-
-###  Monitoring tools
-
-##  Slow Code
-
-###  Writing efficient code
-
-###  Using the right data structures
-
-###  Expensive loops
-
-###  Keeping local results
-
-###  Slow script with expensive loop
-
-###  More about improving our code
-
-##  When Slowness Problems Get Complex
-
-###  Parallelizing operations
-
-###  Slowly growing in complexity
-
-###  Dealing with complex slow systems
-
-###  Using threads to make things go faster
-
-###  More about complex slow systems
-
-##  Review
-
-###  Glossary : Course-4_Module-2
-
-###  Qwiklabs Assessment : Performance tuning in Python scripts
-
-# MODULE 3 : Crashing Programs
-
-##  Why Programs Crash
-
-###  Introduction to Crashing Programs
-
-###  Systems that Crash
-
-###  Understanding crashing applications
-
-###  What to do when you can't fix the program?
-
-###  Internal server error
-
-###  Resources for understanding crashes
-
-##  Code that Crashes
-
-###  Accessing invalid memory
-
-###  Unhandled errors and exceptions
-
-###  Fixing someone else's code
-
-###  Debugging a segmentation fault
-
-###  Debugging a Python crash
-
-###  Debugging with print
-
-###  Debugging with assert
-
-###  Try and catch debugging
-
-###  Python logging module
-
-###  Python debugging with pdb
-
-###  Debugging/breakpoints in VS Code
-
-###  AI infused debugging and paired programming
-
-###  Resources for debugging crashes
-
-##  Handling Bigger incidents
-
-###  Crashes in complex systems
-
-###  Communication and documentation during incidents
-
-###  Writing effective postmortems
-
-##  Review
-
-###  Glossary : Course-4_Module-3
-
-###  Qwiklabs Assessment : Fix errors in Python scripts
-
 # MODULE 4 : Managing Resources
 
-##  Managing computer resources
+## Managing computer resources
 
-###  Introduction on Managing Resources
+### Introduction on Managing Resources
 
-###  Memory leaks and how to prevent them
+### Memory leaks and how to prevent them
 
-###  Managing disk space
+- Memory leak :
+    - happens when a chunk of memory that's no longer needed is not released
+    - if it becomes larger, can cause the whole system to start misbehaving
+    - causing unrelated programs to crash
+- Garbage collector :
+    - It is the in charge of freeing the memory that's no longer in use
 
-###  Network saturation
+### Managing disk space
 
-###  Dealing with memory leaks
+### Network saturation
 
-###  More about managing resources
+### Dealing with memory leaks
 
-##  Managing our time
+### More about managing resources
 
-###  Getting to the important tasks
+## Managing our time
 
-###  Prioritizing tasks
+### Getting to the important tasks
 
-###  Estimating the Time tasks will take
+### Prioritizing tasks
 
-###  Communicating expectations
+### Estimating the Time tasks will take
 
-###  More about making the best use of your time
+### Communicating expectations
 
-##  Making our future live easier
+### More about making the best use of your time
 
-###  Dealing with Hard Problems
+## Making our future live easier
 
-###  Proactive Practices
+### Dealing with Hard Problems
 
-###  Planning Future Resource Usage
+### Proactive Practices
 
-###  Change management in virtualized environments
+### Planning Future Resource Usage
 
-###  Containerized Applications : Docker
+### Change management in virtualized environments
 
-###  Preventing Future Problems
+### Containerized Applications : Docker
 
-###  More about preventing future breakage
+### Preventing Future Problems
 
-##  Review
+### More about preventing future breakage
 
-###  Glossary : Course-4_Module-4
+## Review
 
-###  Qwiklabs Assessment : Debug and Solve Software Problems
+### Glossary : Course-4_Module-4
 
-###  IT skills in action
+### Qwiklabs Assessment : Debug and Solve Software Problems
 
-##  Interviewing
+### IT skills in action
 
-###  Getting interviews through networking
+## Interviewing
 
-###  The interview process
+### Getting interviews through networking
 
-###  Interviewing at different type of companies
+### The interview process
 
-###  Developing an Elevator Pitch
+### Interviewing at different type of companies
 
-###  Asking the interviewer questions
+### Developing an Elevator Pitch
 
-###  Answer questions with the STAR method
+### Asking the interviewer questions
 
-###  Interview warmup
+### Answer questions with the STAR method
 
-###  Negotiating the contract
+### Interview warmup
 
-##  Wrap up
+### Negotiating the contract
+
+## Wrap up
