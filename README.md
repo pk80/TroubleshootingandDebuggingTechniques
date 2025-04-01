@@ -21,7 +21,7 @@
     * [Finding invalid data](#finding-invalid-data)
   * [Review](#review)
     * [Glossary : Course-4_Module-1](#glossary--course-4_module-1)
-    * [Qwiklabs Assessment : Debug Python Scripts](#qwiklabs-assessment--debug-python-scripts)
+    * [Qwiklab Assessment : Debug Python Scripts](#qwiklab-assessment--debug-python-scripts)
 * [MODULE 2 : Slowness](#module-2--slowness)
   * [Understanding Slowness](#understanding-slowness)
     * [Introduction to Slowness](#introduction-to-slowness)
@@ -45,7 +45,7 @@
     * [More about complex slow systems](#more-about-complex-slow-systems)
   * [Review](#review-1)
     * [Glossary : Course-4_Module-2](#glossary--course-4_module-2)
-    * [Qwiklabs Assessment : Performance tuning in Python scripts](#qwiklabs-assessment--performance-tuning-in-python-scripts)
+    * [Qwiklab Assessment : Performance tuning in Python scripts](#qwiklab-assessment--performance-tuning-in-python-scripts)
 * [MODULE 3 : Crashing Programs](#module-3--crashing-programs)
   * [Why Programs Crash](#why-programs-crash)
     * [Introduction to Crashing Programs](#introduction-to-crashing-programs)
@@ -57,7 +57,7 @@
   * [Code that Crashes](#code-that-crashes)
     * [Accessing invalid memory](#accessing-invalid-memory)
     * [Unhandled errors and exceptions](#unhandled-errors-and-exceptions)
-    * [Fixing someone else's code](#fixing-someone-elses-code)
+    * [Fixing someone else code](#fixing-someone-else-code)
     * [Debugging a segmentation fault](#debugging-a-segmentation-fault)
     * [Debugging a Python crash](#debugging-a-python-crash)
     * [Debugging with print](#debugging-with-print)
@@ -74,7 +74,7 @@
     * [Writing effective postmortems](#writing-effective-postmortems)
   * [Review](#review-2)
     * [Glossary : Course-4_Module-3](#glossary--course-4_module-3)
-    * [Qwiklabs Assessment : Fix errors in Python scripts](#qwiklabs-assessment--fix-errors-in-python-scripts)
+    * [Qwiklab Assessment : Fix errors in Python scripts](#qwiklab-assessment--fix-errors-in-python-scripts)
 * [MODULE 4 : Managing Resources](#module-4--managing-resources)
   * [Managing computer resources](#managing-computer-resources)
     * [Introduction on Managing Resources](#introduction-on-managing-resources)
@@ -99,7 +99,7 @@
     * [More about preventing future breakage](#more-about-preventing-future-breakage)
   * [Review](#review-3)
     * [Glossary : Course-4_Module-4](#glossary--course-4_module-4)
-    * [Qwiklabs Assessment : Debug and Solve Software Problems](#qwiklabs-assessment--debug-and-solve-software-problems)
+    * [Qwiklab Assessment : Debug and Solve Software Problems](#qwiklab-assessment--debug-and-solve-software-problems)
     * [IT skills in action](#it-skills-in-action)
   * [Interviewing](#interviewing)
     * [Getting interviews through networking](#getting-interviews-through-networking)
@@ -115,224 +115,846 @@
 
 # MODULE 1 : Troubleshooting Concepts
 
-##  Introduction
+## Introduction
+
 - Different flavors of technical problems
-  - crashing unexpectedly
-  - getting stuck when it should be processing information
-  - make your script run faster, use less memory, or transmit less data over the network
-  - overall system isn't running as expected
-- We'll learn how to solve any technical problem 
+    - crashing unexpectedly
+    - getting stuck when it should be processing information
+    - make your script run faster, use less memory, or transmit fewer(less) data over the network
+    - overall system isn't running as expected
+- We'll learn how to solve any technical problem
+- Prerequisites for this course:
+    - Operating Systems: file systems, processes, log files
+    - Computer hardware: CPU, RAM, disk, graphic, and Network Cards
+    - Basic Networking: network connections and network bandwidth
 
-##  Introduction to Debugging
+## Introduction to Debugging
 
-###  Debugging
+- Essential debugging techniques
+    - basic process that we can use for tackling any technical problem
+    - different ways we can approach understanding
+        - what's going on and
+        - finding the root cause of an issue
+        - including a process called binary search to troubleshoot problems.
+    - how to apply techniques (reusable) to solve
+- Finally, you'll be able to apply techniques to solve a technical issue
 
-###  Problem solving steps
+### Debugging
 
-###  Silently crashing application
+- Troubleshooting : The process of identifying, analyzing, and solving problems
+    - When we're fixing problems in the system running the application
+- Problems may be caused by hardware, OS, applications running on the computer, or environment and configuration of the
+  software
+- Debugging : The process fo identifying, analyzing, and removing bugs in a system
+    - When we're fixing the bugs in the actual code of the application
+- Tools to get more information about the system
+    - `tcpdump` and `Wireshark` : show ongoing network connections
+    - `ps`, `top` or `free` : show number and types of resources used in the system
+    - `strace` : look at system calls made by a program
+    - `ltrace` : look at library call made by the software
+- Debuggers : Let us follow the code line by line, inspect changes in variable assignments, interrupt the program when a
+  specific condition is met, and more
 
-##  Understanding Problem
+### Problem solving steps
 
-###  It Doesn't Work
+1. Getting information
+2. Finding the root cause
+3. Performing the necessary remediation
 
-###  Creating a Reproduction Case
+### Silently crashing application
 
-###  Finding the Root Cause
+- reproduce the problem
+- tools used to identify the problems
+    - strace : shows all system calls and errors
+- System calls : calls that the programs running on our computer make to the running kernel
 
-###  Dealing with Intermittent Issues
+```text
+strace ./<executable_file>
+strace -o failure_output.strace ./<executable_file>
+less failure_output.strace
+# trace the error and solve it
+```
 
-###  Intermittently Failing Script
+- document the issue
+- immediate remediation is to tell the user how to solve the core problem
+- long term remediation is to contact developers of the software and let them know about the issue
 
-##  Binary Searching a Problem
+## Understanding Problem
 
-###  Binary Search
+### It Doesn't Work
 
-###  Linear and Binary
+- more information from the user who complains "it doesn't work"
+    - what were you trying to do?
+    - what steps did you follow?
+    - what was the expected result?
+    - what was the actual result?
+- The load average on linux is how much time a processor is busy in a given minute, with one meaning it was busy for the
+  whole minute. This shouldn't be above the amount of processors in the computer.
+- A number higher than the amount of processors means teh computer is overloaded.
+- Stop the backup system by calling kill-STOP. This will suspend the execution of the program until you let it continue
+  or decide to terminate it.
 
-###  Applying binary search in troubleshooting
+### Creating a Reproduction Case
 
-###  Finding invalid data
+- Reproduction case : a way to verify if the problem is present or not
+- look at logs :
+    - linux : /var/log/syslog and .xsession-errors
+    - mac-os : /Library/Logs
+    - windows : Event viewer
 
-##  Review
+### Finding the Root Cause
 
-###  Glossary : Course-4_Module-1
+- understanding the root cause is essential for performing the long-term remediation.
+- problem-solving (debugging) creativity
+- different ideas until we find one that explains the problem
+- look at information we currently have and gather more if needed
+- searching online for error messages
+- look at the documents of the applications involved
+- check hypothesis in a test environment instead of production environment
+- tools help you get more information
+    - `iotop` : like `top`, lets us see which processes are using the most input and output
+    - `iostat` : show statistics on the input/output operations and the virtual memory operations
+    - `vmstat` : same as `iostat`
+- `ionice`, command used to make our backup system reduce its priority to access the dist and let the web services use
+  it too
+- `iftop`, similar to `top` showing the current traffic on the network interfaces
+- `rsync`, command used for backing up data, includes `-bwlimit` option
+- `Trickle`, program to limit the bandwidth being used
+- `nice`, command to reduce the priority of the process and accessing the CPU
 
-###  Qwiklabs Assessment : Debug Python Scripts
+### Dealing with Intermittent Issues
+
+- Bugs that come and go are hard to reproduce, and are extremely annoying to debug
+- Debug an issue
+    - get more involved in what's going on
+    - adding more logging information to the service around inputs and function calls
+    - check for logging configuration
+    - monitor the environment
+- Depending on the problem, look at
+    - the load on the computer
+    - the processes running at the same time
+    - the usage of the network
+- Heisenbug issue : bug goes away when we add extra logging information or when we follow the code step by step using a
+  debugger. This is an annoying type of intermittent issue.
+- Werner Heisenberg : scientist first described the observer effect
+- Observer Effect : observing a phenomenon alters the phenomenon
+- another intermittent issue is when we go off and on
+
+### Intermittently Failing Script
+
+- Finding the root cause of the problem in sending meeting
+
+## Binary Searching a Problem
+
+### Binary Search
+
+- Linear Search : longer list, longer it takes
+- Binary Search : search on sorted list
+    - calculated as the base two algorithm of lists length
+
+### Linear and Binary
+
+### Applying binary search in troubleshooting
+
+### Finding invalid data
+
+- `wc` command counts the characters, words and lines in a file
+- `head` command prints the first lines in the file
+- `tail` command prints the last lines in the file
+
+```text
+# Below is the bisect method
+# print number of lines in a file
+wc -l <filename>
+# print first 15 lines in the file
+head -15 <filename>
+# print last 20 lines in the file
+tail -20 <filename>
+# finding in first half of the file
+```
+
+## Review
+
+### Glossary : Course-4_Module-1
+
+**Terms and definitions from Course 4, Module 1**
+
+- **Binary search**: A search algorithm used to find a specific item in a sorted list or array by repeatedly dividing
+  the
+  search space in half until the desired item is found or determined to be absent
+- **Bisecting**: Dividing in two, also a Git command
+- **Debuggers**: Tools that follow the code line by line, inspect changes in variable assignments, interrupt the program
+  when a specific condition is met, and more
+- **Debugging**: The process of identifying, analyzing, and removing bugs in the actual code of a system in the
+  application
+- **Linear search**: The process of searching each line of data until the desired data entry is located
+- **Observer effect**: The idea that observing a phenomenon alters the phenomenon
+- **System calls**: The calls that the programs running on our computer make to the running kernel
+- **Troubleshooting**: The process of solving any kind of problem in the system running the application
+
+### Qwiklab Assessment : Debug Python Scripts
+
+Imagine one of your colleagues has written a Python script that's failing to run correctly. They're asking for your help
+to debug it. In this lab, you'll look into why the script is crashing and apply the problem-solving steps that we've
+already learned to get information, find the root cause, and remediate the problem.
 
 # MODULE 2 : Slowness
 
-##  Understanding Slowness
+## Understanding Slowness
 
-###  Introduction to Slowness
+### Introduction to Slowness
 
-###  Why is my computer slow?
+- Reasons for slowness
+    - computer
+    - scripts
+    - complex systems
+    - opened applications
 
-###  How computers use resources
+### Why is my computer slow?
 
-###  Possible causes of slowness
+- instructions allow seemingly execute number of things at the same time
+- Addressing slowness / identifying bottleneck
+    - device
+    - script
+    - system
+    - other resource limiting the process
+    - CPU, disk, memory or network
+- Monitor the usage of each resource and then workout which one is blocking our programs to run faster
+    - `top`, `iotop`,`iftop`
+    - MacOS - Activity Monitor
+    - Windows - Resources Monitor, Performance Monitor
 
-###  Slow web server
+### How computers use resources
 
-###  Monitoring tools
+- Transmission speed : CPU's internal memory > RAM > File in disk > Network
+- Cache : Stores data in a form that's faster to access than its original form
+- Memory leak : Memory which is no longer needed is not getting released
 
-##  Slow Code
+### Possible causes of slowness
 
-###  Writing efficient code
+### Slow web server
 
-###  Using the right data structures
+```text
+# figure out how slow website is responding
+ab -n 500 <website>/
+...
+# ab stands for Apache Benchmark tool
+# 500 is the number of requests made to website
+```
 
-###  Expensive loops
+```text
+# connecting to the web server
+ssh webserver
+password:.....
+.....
 
-###  Keeping local results
+# check for anything suspicious
+top
 
-###  Slow script with expensive loop
+# start a process with different priority : nice
+nice 
+# change priority of a process that's already running : use renice
+for pid in $(pidof COMMAND); do renice 19 $pid; done
+```
 
-###  More about improving our code
+```text
+ps ax | less
+```
 
-##  When Slowness Problems Get Complex
+```text
+for pid in $(pidof COMMAND); do while kill -CONT $pid; do sleep 1; done; done
+ab n 500 <website>/
+```
 
-###  Parallelizing operations
+### Monitoring tools
 
-###  Slowly growing in complexity
+## Slow Code
 
-###  Dealing with complex slow systems
+### Writing efficient code
 
-###  Using threads to make things go faster
+- readable, easy to write & understand
+- clear code and try to make it run faster
+- trying to optimize every second out of a script is probably not worth your time
+- if we want our code to finish faster, we need to make our computer do less work
+- profiler : tool that measures the resources that our code is using, giving us a better understanding of what's going
+  on
+    - gprof : to analyse c program
+    - cProfile : to analyse python program (to count function calls)
+- expensive action : those that can take a long time to complete
+    - include parsing a file, reading data over network or iterating through whole list
 
-###  More about complex slow systems
+### Using the right data structures
 
-##  Review
+- Lists, Dictionaries, Tuples, and Sets are important data structures in python
+- Lists : sequence of elements.
+    - we can add/remove/modify them
+    - we can iterate through the whole list to operate on each of the elements
+    - it's called as ArrayList in java, Vector in C++, Array in Ruby and Slice in Go
+    - This takes more time to find something in the list if it is too long
+    - if you need to access elements by position, or will always iterate through all the elements, use a list to them.
+- Dictionaries : store key-value pairs.
+    - we can add data by associating value to a key
+    - we can retrieve a value by looking up a specific key
+    - it's called as HashMap in Java, Unordered Map in C++, Hash in Ruby and Map in Go
+    - superfast for looking up for keys in just for one operation
+    - if you need to look up the element using a key, use a dictionary
+- think twice about creating copies of structures that we have in memory (maybe big)
 
-###  Glossary : Course-4_Module-2
+### Expensive loops
 
-###  Qwiklabs Assessment : Performance tuning in Python scripts
+- loops make our computer do things repetitively
+- if you do an expensive operation inside the loop, you multiply the time it takes to do the expensive operation by the
+  amount of time you repeat the loop.
+- it is better to do expensive operations outside the loop
+- make sure that the list of elements that you're iterating through is only as long as you really need it to be
+- remember to break out of the loop once you've finished what you were looking for
+
+### Keeping local results
+
+- avoid expensive operations by creating a local cache
+- remember to update cache (once per day)
+- sometimes creating a variable also suffice this purpose
+
+### Slow script with expensive loop
+
+- different values in the print on how long it took to execute a command by calling it with `time`
+    - Real : the amount of actual time that it took to execute the command
+        - this is sometimes called as wall-clock time
+    - User : the time spent doing operations in the user space
+    - Sys : the time spent doing system-level operations
+- user profilers to get some data what's going on
+    - `pprofile3 -f callgrind -o profile.out <command>`
+        - -f flag is to use callgrind file format
+    - `kcachegrind <profile.out>` to look at the contents, a graphical interface for looking into these files.
+
+### More about improving our code
+
+## When Slowness Problems Get Complex
+
+### Parallelizing operations
+
+- do operations in parallels
+- `concurrency` is how we write programs that do operations in parallel
+- best way to do this is to split them across different processes
+- good balance of different work loads
+- Threads : let us run parallel tasks inside a process
+    - Asyncio module in python does this
+
+### Slowly growing in complexity
+
+### Dealing with complex slow systems
+
+- for dynamic website, we might try adding caching
+- for too many requests for one machine, you'll need to distribute the load across more computers. For this, reorganize
+  the code so that it's capable of running in a distributed system instead of on a single computer.
+
+### Using threads to make things go faster
+
+- Executor : is the process that's in charge of distributing the work among the different workers
+- introduce `form cncurrent import future` module :
+    - provides a couple of different executors; one for using threads and another for using process
+-
+
+### More about complex slow systems
+
+## Review
+
+### Glossary : Course-4_Module-2
+
+**Terms and definitions from Course 4, Module 2**
+
+- **Activity Monitor**: macOS tool that shows what's using the most CPU, memory, energy, disk, or network
+- **Cache**: This stores data in a form that's faster to access than its original form
+- **Executor**: This is the process that's in charge of distributing the work among the different workers
+- **Expensive actions**: Actions that can take a long time to complete
+- **Futures**: A module provides a couple of different executors, one for using threads and the other one for using
+  processes
+- **Lists**: Sequences of elements
+- **Memory leak**: This happens when a chunk of memory that's no longer needed is not released
+- **Profiler**: A tool that measures the resources the code is using to see how the memory is allocated and how the time
+  is spent
+- **Real time**: The amount of actual time that it took to execute the command
+- **Resource Monitor (or Performance Monitor)**: Windows OS tool that shows what's using the most CPU, memory, energy,
+  disk, or network
+- **Sys time**: The time spent doing system level operations
+- **Threads**: Run parallel tasks inside a process
+- **User time**: The time spent doing operations in the user space
+
+### Qwiklab Assessment : Performance tuning in Python scripts
+
+Imagine one of your colleagues has written a Python script that's failing to run correctly. They're asking for your help
+to debug it. In this lab, you'll look into why the script is crashing and apply the problem-solving steps that we've
+already learned to get information, find the root cause, and remediate the problem.
+
+You're an IT administrator for a media production company that uses Network-Attached Storage (NAS) to store all data
+generated daily (e.g., videos, photos). One of your daily tasks is to back up the data in the production NAS (mounted at
+/data/prod on the server) to the backup NAS (mounted at /data/prod_backup on the server). A former member of the team
+developed a Python script (full path /scripts/dailysync.py) that backs up data daily. But recently, there's been a lot
+of data generated and the script isn't catching up to the speed. As a result, the backup process now takes more than 20
+hours to finish, which isn't efficient at all for a daily backup.
+
+**What you'll do**
+
+- Identify what limits the system performance: I/O, Network, CPU, or Memory
+- Use rsync command instead of cp to transfer data
+- Get system standard output and manipulate the output
+- Find differences between threading and multiprocessing
 
 # MODULE 3 : Crashing Programs
 
-##  Why Programs Crash
+## Why Programs Crash
 
-###  Introduction to Crashing Programs
+### Introduction to Crashing Programs
 
-###  Systems that Crash
+- causes of crashes
+    - software ran into unexpected situation, a state that developer didn't anticipate
+        - could be by hardware problem, like a broken ramjet
+        - could be a bug in some part of the code
+        - could be an issue in the overall system(program expecting a library)
 
-###  Understanding crashing applications
+### Systems that Crash
 
-###  What to do when you can't fix the program?
+- look at the logs
+- try to reproduce the problem
+- check if this happens reliably (do all fail/is it confined to one specific)
+- check if it from application, any other application or the whole system
+- check for ram or hard drives age
+- check for heat generation in the system
+- check for OS issues
 
-###  Internal server error
+### Understanding crashing applications
 
-###  Resources for understanding crashes
+- look for logs for better understanding (console app in macOS)
+- search for the error if not understood
+- try getting more info from debug logging, enable it from setting in config file
+- tools help
+    - strace(linux), dtruss(macOS), process monitor(windows)
+- check for configuration changes
+- reproduction case
+- To find teh root cause of a crashing application,
+    - we'll want to look at all available logs,
+    - figer out what changed
+    - trace the system/library calls the program makes
+    - and create the smallest possible reproduction case
 
-##  Code that Crashes
+### What to do when you can't fix the program?
 
-###  Accessing invalid memory
+- work around the problem to avoid the crash
+- write a wrapper:
+    - a function / program that provides a compatibility layer between two functions or programs, so they can work well
+      together
+- check for system environment where it is working well
+    - for instance run in virtual environment / container
+- watchdog:
+    - a program that checks whether a program is running and, when it's not, starts the program again
+    - a script running in the background
+- Answer these questions for developers to figure out what's wrong
+    - what were you trying to do?
+    - what were the steps you followed?
+    - what did you expect to happen?
+    - what was the actual outcome?
 
-###  Unhandled errors and exceptions
+### Internal server error
 
-###  Fixing someone else's code
+- `sudo netstat -nlp | grep :80` command
 
-###  Debugging a segmentation fault
+### Resources for understanding crashes
 
-###  Debugging a Python crash
+## Code that Crashes
 
-###  Debugging with print
+### Accessing invalid memory
 
-###  Debugging with assert
+- Accessing invalid memory means that the process tried to access a portion of the system's memory that was not assigned
+  to it.
+- Segmentation fault / General protection fault :
+    - if a pointer (variables that store memory addresses) is set to a value outside the valid memory range for that
+      process, it will point to invalid memory
+    - forgetting to initialize a variable
+        - trying to access a list element outside the valid range
+        - trying to use a portion of memory after having given it back
+        - trying to write more data than the requested portion of memory can hold
+    - Segfaults known short for Segmentation Fault, which occurs when invalid memory is being accessed
+- Attaching a debugger to the faulty program will ensure the information about the function where the fault happened
+- A PBD file
+    - is used to generate debugging symbols using Microsoft compilers
+    - holds debugging and project state information that allows incremental linking
+- Furthermore, program can be compiled with debugging symbols (names of the variables and functions being used) for more
+  details
+- Dr.Memory can assist in finding out if invalid operations are occurring in a program running on Windows or Linux
+- Undefined behavior :
+    - The code is doing something that's not valid in the programming language
+- Valgrind : 
+    - For profiling C and C++ programs
+    - A very powerful tool that can tell us if the code is doing any invalid operations, no matter if it crashes or not
+    - Valgrind can assist in finding out if invalid operations are occurring in a program running on a Linux or macOS
+      system
 
-###  Try and catch debugging
+### Unhandled errors and exceptions
 
-###  Python logging module
+- Unhandled errors
+    - IndexError
+    - TypeError
+    - AttributeError
+    - DivisionByZeroError
+    - etc...
+- Traceback :
+    - Shows the line of the different functions that were being executed when the problem happened
+- PDB debugging :
+    - use pdb module
+    - provides an interactive debugging environment where you can
+        - set breakpoints,
+        - step through code,
+        - inspect variables, and
+        - evaluate expressions
+- Printf debugging :
+    - use logging module
+    - common debugging technique where you
+        - insert printf (or similar print statements) into your code
+        - to display the values of variables and the flow of execution,
+        - allowing you to trace the program's behavior and identify errors
 
-###  Python debugging with pdb
+### Fixing someone else code
 
-###  Debugging/breakpoints in VS Code
+- First spend some time to acquaint yourselves with the code written by others, so that we can understand what's going
+  on
+- Understand by reading the comments written in the code
+- Understand by reading the tests associated to the code
+- For large projects focus on
+    - functions
+    - modules
+- After getting acquainted with the program's code, start to fix the problem by locating the affected function
 
-###  AI infused debugging and paired programming
+### Debugging a segmentation fault
 
-###  Resources for debugging crashes
+- A simple example program that crashes with a segfault
+- The `ulimit` command is used to create a core file that stores information related to a crash.
+- Core File:
+    - Store all the information related to the crash so that we, or someone else, can debug what's going on
+- gdb : debugger
+    - The gdb command will debug a core dump and stop where the failure was recorded.
+    - The `list` command shows the lines around the failed line of code that is being reviewed in a backtrace.
+    - The `backtrace` command can be used to show a summary of the function calls that were used to the point where the
+      failure occurs.
 
-##  Handling Bigger incidents
+```text
+./example
+# code output  is segfault
 
-###  Crashes in complex systems
+ulimit -c unlimited
+./example
+# code output is segfault (core dumped)
 
-###  Communication and documentation during incidents
+ls -l core
+# output
+-rw------ 1 user ussr 80928 Jan 9 14:27 core
 
-###  Writing effective postmortems
+gdb - core example
+# output
+----
+Program terminated with signal SIGSEGV, Segmentation fault.
+#0  __strlen_avx2 () at ../sysdeps/x86_64/multiarch/strlen-avx2.S:65
+65	../sysdeps/x86_64/multiarch/strlen-avx2.S: No such file or directory.
+(gdb)
+(gdb) backtrace
+----
+(gdb) up
+----
+(gdb) list
+----
+(gdb) print i
+----
+(gdb) print argv[0]
+----
+(gdb) print argv[1]
+---- 0x0 
+# which is a null pointer
+(gdb) 
+```
 
-##  Review
+### Debugging a Python crash
 
-###  Glossary : Course-4_Module-3
+- `pdb3` command is a Python debugger tool
+    - typing `next` command after starting the pdb3 debugger will run each line of instructions one at a time.
+    - running the `continue` command after starting the pdb3 debugger will execute the program until it finishes or
+      crashes.
 
-###  Qwiklabs Assessment : Fix errors in Python scripts
+```text
+cat new_products.csv
 
-# MODULE 4 : Managing Resources
+./update_products.py new_products.csv
+# this throws an error similar to backtrace
+Traceback ----
+----
+KeyError: 'product_code'
 
-##  Managing computer resources
+pdb3 update_products.py new_products.csv
+----
+(Pdb) continue
+Traceback: ----
+----
+(Pdb) print(row)
+# BOM / Special chars are seen before product_code
+----
+(Pdb)
 
-###  Introduction on Managing Resources
+./update_products.py new_products.csv
+```
 
-###  Memory leaks and how to prevent them
+### Debugging with print
 
-###  Managing disk space
+### Debugging with assert
 
-###  Network saturation
+```text
+def read_file_and_do_something(filename):
+    assert filename != “”, “You must specify a filename!”
+    with open(filename, “r”) as fp:
+        …
+```
 
-###  Dealing with memory leaks
+### Try and catch debugging
 
-###  More about managing resources
+```text
+try:
+    # code that might raise an exception
+except SomeExceptionType:
+    # handle the exception
+    
+def calculate_average(numbers):
+    try:
+        return sum(numbers) / len(numbers)
+    except ZeroDivisionError:
+        print("The list is empty. Cannot calculate the average.")
+        return None
+  
+# Getting more detailed information     
+class InvalidInputError(Exception):
+    pass
+    
+class EmptyInputError(Exception):
+    pass
+    
+def calculate_average(numbers):
+    try:
+        return sum(numbers) / len(numbers)
+    except TypeError:
+        raise InvalidInputError(f"Expected a list or tuple, but got {type(numbers)}")
+    except ZeroDivisionError:
+        raise EmptyInputError("The list is empty. Cannot calculate the average.")
+    finally:
+        print("Execution of calculate_average function completed.")
+```
 
-##  Managing our time
+### Python logging module
 
-###  Getting to the important tasks
+```text
+import logging
 
-###  Prioritizing tasks
+logging.warning('This is a warning message')
+logging.error('This is an error message')
 
-###  Estimating the Time tasks will take
+logging.basicConfig(level=logging.DEBUG)
+logging.debug('This is a debug message')
 
-###  Communicating expectations
+logging.basicConfig(filename='app.log', level=logging.DEBUG)
+logging.info('This message will be written to app.log')
 
-###  More about making the best use of your time
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+logging.error('This is an error with a custom format')
 
-##  Making our future live easier
 
-###  Dealing with Hard Problems
+# Logging module in action
+def user_login(username, password):
+    logging.info(f"Attempting to log in user: {username}")
+    # ... (some code for authentication)
+    if authentication_failed:
+        logging.error(f"Login failed for user: {username}")
+    else:
+        logging.info(f"Successfully logged in user: {username}")
+```
 
-###  Proactive Practices
+### Python debugging with pdb
 
-###  Planning Future Resource Usage
+- pdb commands:
+    - a (args): Show the arguments of the current function.
+    - b: Manually set a persistent breakpoint while in debugger.
+    - n (next): Execute the next line within the current function.
+    - s (step): Execute the current line and stop at the first possible occasion (e.g., in a function that is called).
+    - c (continue): Resume normal execution until the next breakpoint.
+    - p (print): Evaluate and print the expression, e.g., p variable_name will print the value of variable_name.
+    - Pp (pretty-print): Pretty-print the value of the expression.
+    - q (quit): Exit the debugger and terminate the program.
+    - r (return): Continue execution until the current function returns.
+    - tbreak: Manually set a temporary breakpoint that goes away once hit the first time.
+    - !: Prefix to execute an arbitrary Python command in the current environment, e.g., !variable_name = "new_value"
+      will set variable_name to "new_value".
 
-###  Change management in virtualized environments
+```text
+# Using pdb
+import pdb
 
-###  Containerized Applications : Docker
+def add_numbers(a, b):
+    pdb.set_trace()  # This will set a breakpoint in the code
+    # and then here you'll enter the interactive debugger
+    result = a + b
+    return result
 
-###  Preventing Future Problems
+print(add_numbers(3, 4))
 
-###  More about preventing future breakage
 
-##  Review
+# If your program crashes, you can use pdb to inspect its state at the time of the crash.
+# Run your script with:
+python3 -m pdb your_script.py
+```
 
-###  Glossary : Course-4_Module-4
+### Debugging/breakpoints in VS Code
 
-###  Qwiklabs Assessment : Debug and Solve Software Problems
+**When to use breakpoints with VS Code**
 
-###  IT skills in action
+You can use breakpoints with VS Code in several situations. For example:
 
-##  Interviewing
+- When your code is causing runtime errors or exceptions
+- When you have errors in loops or other complicated logic
+- When you need to inspect code and variables at specific points during execution
+- When you perform general debugging and testing of your program
 
-###  Getting interviews through networking
+The advantages of breakpoints include:
 
-###  The interview process
+- You can step through your code one line at a time.
+- You can watch the value of variables and see how they change as the code runs (without having to insert several
+  print() statements in your code).
+- You can catch subtle errors more easily.
+- Disadvantages of breakpoints are:
+- Running code in a debugger is slower than running the code from the command line.
+- Setup is required with VS Code and the necessary Python extensions for a new project. It usually takes a few minutes
+  to set up.
 
-###  Interviewing at different type of companies
+### AI infused debugging and paired programming
 
-###  Developing an Elevator Pitch
+- AI tools like
+    - Google Gemini,
+    - GitHub Copilot,
+    - ChatGPT,
+    - Code Llama,
+    - or others
 
-###  Asking the interviewer questions
+### Resources for debugging crashes
 
-###  Answer questions with the STAR method
+## Handling Bigger incidents
 
-###  Interview warmup
+### Crashes in complex systems
 
-###  Negotiating the contract
+- Having good logs is essential
+- Use version control system to rollback
+- Rollback the changes for restoring the service back if it was the cause
+- Performing a rollback may apply to a situation where all services were affected
+- Creating standby servers can be used to provide support for increased demand to the site
+- Deploying a new web server helps with load balancing, but the problem server is still present
+- Removing the server from the pool will provide full service to users from the remaining web servers
 
-##  Wrap up
+### Communication and documentation during incidents
+
+- Documenting what you do, lets you keep track of what you've tried and what the results were
+- It is important to communicate clearly with those affected by the issue
+- Communications lead : Needs to know what's going on, and provide timely updates on the current state and how long
+  until the problem's resolved
+- Incident commander / Incident controller : Needs to look at the big picture and decide what's the best use of the
+  available resources
+- Sum up the information that will be helpful
+    - The root cause
+    - How you diagnosed the problem and found that root cause
+    - What you did to fix the issue
+    - What needs to be done to prevent the problem from happening again
+
+### Writing effective postmortems
+
+- Postmortems : Documents that describe details of incidents to help us learn from our mistakes
+    - goal is to prevent the same issue from happening again
+- These are written after dealing with incidence
+- They are super useful with large incidence
+- Structure of postmortems
+    - what caused the issue
+    - what the impact of the issue was
+    - how it got diagnosed
+    - the shot-term remediation you applied
+    - the long-term remediation you recommend
+
+## Review
+
+### Glossary : Course-4_Module-3
+
+**Terms and definitions from Course 4, Module 3**
+
+- **Breakpoints**: Debugging features that lets code run until a certain line of code is executed
+- **Communications lead**: The lead person who needs to receive timely important communication updates
+- **Core files**: Files that store all the information related to the crash to debug the issue
+- **Incident commander (incident controller)**: The person who needs to look at the big picture and decide what's the
+  best use of the available resources
+- **Pointers**: The variables that store memory addresses
+- **Postmortems**: Documents that describe details of incidents to learn from mistakes
+- **Undefined behavior**: The code is doing something that's not valid in that programming language
+- **Valgrind**: A powerful tool that can tell if the code is doing any invalid operations, no matter if it crashes or
+  not
+- **Watchdog**: This is another process that checks whether a program is running and, when it's not, starts the program
+  again
+- **Watchpoints**: Debugging feature that lets code run until a variable or expression changes
+- **Wrapper**: A function or program that provides a compatibility layer between two functions or programs, so that they
+  can work well together
+
+### Qwiklab Assessment : Fix errors in Python scripts
+
+You're an IT professional who's in charge of the deployment and maintenance of software in your company's fleet. A piece
+of software that's deployed on all machines in your fleet is throwing an error on a number of these machines. You
+haven't written the software and don't have access to the source code. You'll need to examine the environment where the
+software is running in and try to work out what's going on.
+
+**What you'll do**
+
+1. Understand the error messages
+2. Track down the root cause and work to fix it
+3. Understand what to do when you can't modify the program that's throwing errors
+
+```text
+# MODULE NOT FOUND ERROR
+# root directory
+cd /
+# run python file
+python3 /usr/bin/infrastructure
+Traceback ----:
+----
+ModuleNotFoundError: No module named 'matplotlib'
+
+# Fixing the issue
+pip3 install matplotlib
+
+
+# NO FILE ERROR 
+# root directory
+cd /
+# run python file
+python3 /usr/bin/infrastructure
+Scanning for data.csv...
+NoFileError: Could not find data.csv in the working directory
+
+# Fixing the issue
+cd /
+ls
+----
+data.bak
+# root cause found, now rename data.bak to data.csv
+
+
+# MISSING COLUMN ERROR
+# home directory
+cd ~
+cat data.csv
+----
+# column name was missing
+
+# Fixing the issue
+chmod 777 ~/data.csv
+nano ~/data.csv
+# add missing column name and save
+# now run
+python3 /usr/bin/infrastructure
+
+```
