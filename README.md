@@ -551,12 +551,13 @@ hours to finish, which isn't efficient at all for a daily backup.
     - a program that checks whether a program is running and, when it's not, starts the program again
     - a script running in the background
 - Answer these questions for developers to figure out what's wrong
-  - what were you trying to do?
-  - what were the steps you followed?
-  - what did you expect to happen?
-  - what was the actual outcome?
+    - what were you trying to do?
+    - what were the steps you followed?
+    - what did you expect to happen?
+    - what was the actual outcome?
 
 ### Internal server error
+
 - `sudo netstat -nlp | grep :80` command
 
 ### Resources for understanding crashes
@@ -565,27 +566,277 @@ hours to finish, which isn't efficient at all for a daily backup.
 
 ### Accessing invalid memory
 
+- Accessing invalid memory means that the process tried to access a portion of the system's memory that was not assigned
+  to it.
+- Segmentation fault / General protection fault :
+    - if a pointer (variables that store memory addresses) is set to a value outside the valid memory range for that
+      process, it will point to invalid memory
+    - forgetting to initialize a variable
+        - trying to access a list element outside the valid range
+        - trying to use a portion of memory after having given it back
+        - trying to write more data than the requested portion of memory can hold
+    - Segfaults known short for Segmentation Fault, which occurs when invalid memory is being accessed
+- Attaching a debugger to the faulty program will ensure the information about the function where the fault happened
+- A PBD file
+    - is used to generate debugging symbols using Microsoft compilers
+    - holds debugging and project state information that allows incremental linking
+- Furthermore, program can be compiled with debugging symbols (names of the variables and functions being used) for more
+  details
+- Dr.Memory can assist in finding out if invalid operations are occurring in a program running on Windows or Linux
+- Undefined behavior :
+    - The code is doing something that's not valid in the programming language
+- Valgrind :
+    - A very powerful tool that can tell us if the code is doing any invalid operations, no matter if it crashes or not
+    - Valgrind can assist in finding out if invalid operations are occurring in a program running on a Linux or macOS
+      system
+
 ### Unhandled errors and exceptions
+
+- Unhandled errors
+    - IndexError
+    - TypeError
+    - AttributeError
+    - DivisionByZeroError
+    - etc...
+- Traceback :
+    - Shows the line of the different functions that were being executed when the problem happened
+- PDB debugging :
+    - use pdb module
+    - provides an interactive debugging environment where you can
+        - set breakpoints,
+        - step through code,
+        - inspect variables, and
+        - evaluate expressions
+- Printf debugging :
+    - use logging module
+    - common debugging technique where you
+        - insert printf (or similar print statements) into your code
+        - to display the values of variables and the flow of execution,
+        - allowing you to trace the program's behavior and identify errors
 
 ### Fixing someone else code
 
+- First spend some time to acquaint yourselves with the code written by others, so that we can understand what's going
+  on
+- Understand by reading the comments written in the code
+- Understand by reading the tests associated to the code
+- For large projects focus on
+    - functions
+    - modules
+- After getting acquainted with the program's code, start to fix the problem by locating the affected function
+
 ### Debugging a segmentation fault
 
+- A simple example program that crashes with a segfault
+- The `ulimit` command is used to create a core file that stores information related to a crash.
+- Core File:
+    - Store all the information related to the crash so that we, or someone else, can debug what's going on
+- gdb : debugger
+    - The gdb command will debug a core dump and stop where the failure was recorded.
+    - The `list` command shows the lines around the failed line of code that is being reviewed in a backtrace.
+    - The `backtrace` command can be used to show a summary of the function calls that were used to the point where the
+      failure occurs.
+
+```text
+./example
+# code output  is segfault
+
+ulimit -c unlimited
+./example
+# code output is segfault (core dumped)
+
+ls -l core
+# output
+-rw------ 1 user ussr 80928 Jan 9 14:27 core
+
+gdb - core example
+# output
+----
+Program terminated with signal SIGSEGV, Segmentation fault.
+#0  __strlen_avx2 () at ../sysdeps/x86_64/multiarch/strlen-avx2.S:65
+65	../sysdeps/x86_64/multiarch/strlen-avx2.S: No such file or directory.
+(gdb)
+(gdb) backtrace
+----
+(gdb) up
+----
+(gdb) list
+----
+(gdb) print i
+----
+(gdb) print argv[0]
+----
+(gdb) print argv[1]
+---- 0x0 
+# which is a null pointer
+(gdb) 
+```
+
 ### Debugging a Python crash
+
+- `pdb3` command is a Python debugger tool
+    - typing `next` command after starting the pdb3 debugger will run each line of instructions one at a time.
+    - running the `continue` command after starting the pdb3 debugger will execute the program until it finishes or
+      crashes.
+
+```text
+cat new_products.csv
+
+./update_products.py new_products.csv
+# this throws an error similar to backtrace
+Traceback ----
+----
+KeyError: 'product_code'
+
+pdb3 update_products.py new_products.csv
+----
+(Pdb) continue
+Traceback: ----
+----
+(Pdb) print(row)
+# BOM / Special chars are seen before product_code
+----
+(Pdb)
+
+./update_products.py new_products.csv
+```
 
 ### Debugging with print
 
 ### Debugging with assert
 
+```text
+def read_file_and_do_something(filename):
+    assert filename != “”, “You must specify a filename!”
+    with open(filename, “r”) as fp:
+        …
+```
+
 ### Try and catch debugging
+
+```text
+try:
+    # code that might raise an exception
+except SomeExceptionType:
+    # handle the exception
+    
+def calculate_average(numbers):
+    try:
+        return sum(numbers) / len(numbers)
+    except ZeroDivisionError:
+        print("The list is empty. Cannot calculate the average.")
+        return None
+  
+# Getting more detailed information     
+class InvalidInputError(Exception):
+    pass
+    
+class EmptyInputError(Exception):
+    pass
+    
+def calculate_average(numbers):
+    try:
+        return sum(numbers) / len(numbers)
+    except TypeError:
+        raise InvalidInputError(f"Expected a list or tuple, but got {type(numbers)}")
+    except ZeroDivisionError:
+        raise EmptyInputError("The list is empty. Cannot calculate the average.")
+    finally:
+        print("Execution of calculate_average function completed.")
+```
 
 ### Python logging module
 
+```text
+import logging
+
+logging.warning('This is a warning message')
+logging.error('This is an error message')
+
+logging.basicConfig(level=logging.DEBUG)
+logging.debug('This is a debug message')
+
+logging.basicConfig(filename='app.log', level=logging.DEBUG)
+logging.info('This message will be written to app.log')
+
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+logging.error('This is an error with a custom format')
+
+
+# Logging module in action
+def user_login(username, password):
+    logging.info(f"Attempting to log in user: {username}")
+    # ... (some code for authentication)
+    if authentication_failed:
+        logging.error(f"Login failed for user: {username}")
+    else:
+        logging.info(f"Successfully logged in user: {username}")
+```
+
 ### Python debugging with pdb
+
+- pdb commands:
+    - a (args): Show the arguments of the current function.
+    - b: Manually set a persistent breakpoint while in debugger.
+    - n (next): Execute the next line within the current function.
+    - s (step): Execute the current line and stop at the first possible occasion (e.g., in a function that is called).
+    - c (continue): Resume normal execution until the next breakpoint.
+    - p (print): Evaluate and print the expression, e.g., p variable_name will print the value of variable_name.
+    - Pp (pretty-print): Pretty-print the value of the expression.
+    - q (quit): Exit the debugger and terminate the program.
+    - r (return): Continue execution until the current function returns.
+    - tbreak: Manually set a temporary breakpoint that goes away once hit the first time.
+    - !: Prefix to execute an arbitrary Python command in the current environment, e.g., !variable_name = "new_value"
+      will set variable_name to "new_value".
+
+```text
+# Using pdb
+import pdb
+
+def add_numbers(a, b):
+    pdb.set_trace()  # This will set a breakpoint in the code
+    # and then here you'll enter the interactive debugger
+    result = a + b
+    return result
+
+print(add_numbers(3, 4))
+
+
+# If your program crashes, you can use pdb to inspect its state at the time of the crash.
+# Run your script with:
+python3 -m pdb your_script.py
+```
 
 ### Debugging/breakpoints in VS Code
 
+**When to use breakpoints with VS Code**
+
+You can use breakpoints with VS Code in several situations. For example:
+
+- When your code is causing runtime errors or exceptions
+- When you have errors in loops or other complicated logic
+- When you need to inspect code and variables at specific points during execution
+- When you perform general debugging and testing of your program
+
+The advantages of breakpoints include:
+
+- You can step through your code one line at a time.
+- You can watch the value of variables and see how they change as the code runs (without having to insert several
+  print() statements in your code).
+- You can catch subtle errors more easily.
+- Disadvantages of breakpoints are:
+- Running code in a debugger is slower than running the code from the command line.
+- Setup is required with VS Code and the necessary Python extensions for a new project. It usually takes a few minutes
+  to set up.
+
 ### AI infused debugging and paired programming
+
+- AI tools like
+    - Google Gemini,
+    - GitHub Copilot,
+    - ChatGPT,
+    - Code Llama,
+    - or others
 
 ### Resources for debugging crashes
 
@@ -593,15 +844,121 @@ hours to finish, which isn't efficient at all for a daily backup.
 
 ### Crashes in complex systems
 
+- Having good logs is essential
+- Use version control system to rollback
+- Rollback the changes for restoring the service back if it was the cause
+- Performing a rollback may apply to a situation where all services were affected
+- Creating standby servers can be used to provide support for increased demand to the site
+- Deploying a new web server helps with load balancing, but the problem server is still present
+- Removing the server from the pool will provide full service to users from the remaining web servers
+
 ### Communication and documentation during incidents
 
+- Documenting what you do, lets you keep track of what you've tried and what the results were
+- It is important to communicate clearly with those affected by the issue
+- Communications lead : Needs to know what's going on, and provide timely updates on the current state and how long
+  until the problem's resolved
+- Incident commander / Incident controller : Needs to look at the big picture and decide what's the best use of the
+  available resources
+- Sum up the information that will be helpful
+    - The root cause
+    - How you diagnosed the problem and found that root cause
+    - What you did to fix the issue
+    - What needs to be done to prevent the problem from happening again
+
 ### Writing effective postmortems
+
+- Postmortems : Documents that describe details of incidents to help us learn from our mistakes
+    - goal is to prevent the same issue from happening again
+- These are written after dealing with incidence
+- They are super useful with large incidence
+- Structure of postmortems
+    - what caused the issue
+    - what the impact of the issue was
+    - how it got diagnosed
+    - the shot-term remediation you applied
+    - the long-term remediation you recommend
 
 ## Review
 
 ### Glossary : Course-4_Module-3
 
+**Terms and definitions from Course 4, Module 3**
+
+- **Breakpoints**: Debugging features that lets code run until a certain line of code is executed
+- **Communications lead**: The lead person who needs to receive timely important communication updates
+- **Core files**: Files that store all the information related to the crash to debug the issue
+- **Incident commander (incident controller)**: The person who needs to look at the big picture and decide what's the
+  best use of the available resources
+- **Pointers**: The variables that store memory addresses
+- **Postmortems**: Documents that describe details of incidents to learn from mistakes
+- **Undefined behavior**: The code is doing something that's not valid in that programming language
+- **Valgrind**: A powerful tool that can tell if the code is doing any invalid operations, no matter if it crashes or
+  not
+- **Watchdog**: This is another process that checks whether a program is running and, when it's not, starts the program
+  again
+- **Watchpoints**: Debugging feature that lets code run until a variable or expression changes
+- **Wrapper**: A function or program that provides a compatibility layer between two functions or programs, so that they
+  can work well together
+
 ### Qwiklab Assessment : Fix errors in Python scripts
+
+You're an IT professional who's in charge of the deployment and maintenance of software in your company's fleet. A piece
+of software that's deployed on all machines in your fleet is throwing an error on a number of these machines. You
+haven't written the software and don't have access to the source code. You'll need to examine the environment where the
+software is running in and try to work out what's going on.
+
+**What you'll do**
+
+1. Understand the error messages
+2. Track down the root cause and work to fix it
+3. Understand what to do when you can't modify the program that's throwing errors
+
+```text
+# MODULE NOT FOUND ERROR
+# root directory
+cd /
+# run python file
+python3 /usr/bin/infrastructure
+Traceback ----:
+----
+ModuleNotFoundError: No module named 'matplotlib'
+
+# Fixing the issue
+pip3 install matplotlib
+
+
+# NO FILE ERROR 
+# root directory
+cd /
+# run python file
+python3 /usr/bin/infrastructure
+Scanning for data.csv...
+NoFileError: Could not find data.csv in the working directory
+
+# Fixing the issue
+cd /
+ls
+----
+data.bak
+# root cause found, now rename data.bak to data.csv
+
+
+# MISSING COLUMN ERROR
+# home directory
+cd ~
+cat data.csv
+----
+# column name was missing
+
+# Fixing the issue
+chmod 777 ~/data.csv
+nano ~/data.csv
+# add missing column name and save
+# now run
+python3 /usr/bin/infrastructure
+
+```
 
 # MODULE 4 : Managing Resources
 
