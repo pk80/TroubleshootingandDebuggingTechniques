@@ -1,118 +1,116 @@
 # Troubleshooting and Debugging Techniques
 
 <!-- TOC -->
-
 * [Troubleshooting and Debugging Techniques](#troubleshooting-and-debugging-techniques)
 * [MODULE 1 : Troubleshooting Concepts](#module-1--troubleshooting-concepts)
-    * [Introduction](#introduction)
-    * [Introduction to Debugging](#introduction-to-debugging)
-        * [Debugging](#debugging)
-        * [Problem solving steps](#problem-solving-steps)
-        * [Silently crashing application](#silently-crashing-application)
-    * [Understanding Problem](#understanding-problem)
-        * [It Doesn't Work](#it-doesnt-work)
-        * [Creating a Reproduction Case](#creating-a-reproduction-case)
-        * [Finding the Root Cause](#finding-the-root-cause)
-        * [Dealing with Intermittent Issues](#dealing-with-intermittent-issues)
-        * [Intermittently Failing Script](#intermittently-failing-script)
-    * [Binary Searching a Problem](#binary-searching-a-problem)
-        * [Binary Search](#binary-search)
-        * [Linear and Binary](#linear-and-binary)
-        * [Applying binary search in troubleshooting](#applying-binary-search-in-troubleshooting)
-        * [Finding invalid data](#finding-invalid-data)
-    * [Review](#review)
-        * [Glossary : Course-4_Module-1](#glossary--course-4_module-1)
-        * [Qwiklab Assessment : Debug Python Scripts](#qwiklab-assessment--debug-python-scripts)
+  * [Introduction](#introduction)
+  * [Introduction to Debugging](#introduction-to-debugging)
+    * [Debugging](#debugging)
+    * [Problem solving steps](#problem-solving-steps)
+    * [Silently crashing application](#silently-crashing-application)
+  * [Understanding Problem](#understanding-problem)
+    * [It Doesn't Work](#it-doesnt-work)
+    * [Creating a Reproduction Case](#creating-a-reproduction-case)
+    * [Finding the Root Cause](#finding-the-root-cause)
+    * [Dealing with Intermittent Issues](#dealing-with-intermittent-issues)
+    * [Intermittently Failing Script](#intermittently-failing-script)
+  * [Binary Searching a Problem](#binary-searching-a-problem)
+    * [Binary Search](#binary-search)
+    * [Linear and Binary](#linear-and-binary)
+    * [Applying binary search in troubleshooting](#applying-binary-search-in-troubleshooting)
+    * [Finding invalid data](#finding-invalid-data)
+  * [Review](#review)
+    * [Glossary : Course-4_Module-1](#glossary--course-4_module-1)
+    * [Qwiklab Assessment : Debug Python Scripts](#qwiklab-assessment--debug-python-scripts)
 * [MODULE 2 : Slowness](#module-2--slowness)
-    * [Understanding Slowness](#understanding-slowness)
-        * [Introduction to Slowness](#introduction-to-slowness)
-        * [Why is my computer slow?](#why-is-my-computer-slow)
-        * [How computers use resources](#how-computers-use-resources)
-        * [Possible causes of slowness](#possible-causes-of-slowness)
-        * [Slow web server](#slow-web-server)
-        * [Monitoring tools](#monitoring-tools)
-    * [Slow Code](#slow-code)
-        * [Writing efficient code](#writing-efficient-code)
-        * [Using the right data structures](#using-the-right-data-structures)
-        * [Expensive loops](#expensive-loops)
-        * [Keeping local results](#keeping-local-results)
-        * [Slow script with expensive loop](#slow-script-with-expensive-loop)
-        * [More about improving our code](#more-about-improving-our-code)
-    * [When Slowness Problems Get Complex](#when-slowness-problems-get-complex)
-        * [Parallelizing operations](#parallelizing-operations)
-        * [Slowly growing in complexity](#slowly-growing-in-complexity)
-        * [Dealing with complex slow systems](#dealing-with-complex-slow-systems)
-        * [Using threads to make things go faster](#using-threads-to-make-things-go-faster)
-        * [More about complex slow systems](#more-about-complex-slow-systems)
-    * [Review](#review-1)
-        * [Glossary : Course-4_Module-2](#glossary--course-4_module-2)
-        * [Qwiklab Assessment : Performance tuning in Python scripts](#qwiklab-assessment--performance-tuning-in-python-scripts)
+  * [Understanding Slowness](#understanding-slowness)
+    * [Introduction to Slowness](#introduction-to-slowness)
+    * [Why is my computer slow?](#why-is-my-computer-slow)
+    * [How computers use resources](#how-computers-use-resources)
+    * [Possible causes of slowness](#possible-causes-of-slowness)
+    * [Slow web server](#slow-web-server)
+    * [Monitoring tools](#monitoring-tools)
+  * [Slow Code](#slow-code)
+    * [Writing efficient code](#writing-efficient-code)
+    * [Using the right data structures](#using-the-right-data-structures)
+    * [Expensive loops](#expensive-loops)
+    * [Keeping local results](#keeping-local-results)
+    * [Slow script with expensive loop](#slow-script-with-expensive-loop)
+    * [More about improving our code](#more-about-improving-our-code)
+  * [When Slowness Problems Get Complex](#when-slowness-problems-get-complex)
+    * [Parallelizing operations](#parallelizing-operations)
+    * [Slowly growing in complexity](#slowly-growing-in-complexity)
+    * [Dealing with complex slow systems](#dealing-with-complex-slow-systems)
+    * [Using threads to make things go faster](#using-threads-to-make-things-go-faster)
+    * [More about complex slow systems](#more-about-complex-slow-systems)
+  * [Review](#review-1)
+    * [Glossary : Course-4_Module-2](#glossary--course-4_module-2)
+    * [Qwiklab Assessment : Performance tuning in Python scripts](#qwiklab-assessment--performance-tuning-in-python-scripts)
 * [MODULE 3 : Crashing Programs](#module-3--crashing-programs)
-    * [Why Programs Crash](#why-programs-crash)
-        * [Introduction to Crashing Programs](#introduction-to-crashing-programs)
-        * [Systems that Crash](#systems-that-crash)
-        * [Understanding crashing applications](#understanding-crashing-applications)
-        * [What to do when you can't fix the program?](#what-to-do-when-you-cant-fix-the-program)
-        * [Internal server error](#internal-server-error)
-        * [Resources for understanding crashes](#resources-for-understanding-crashes)
-    * [Code that Crashes](#code-that-crashes)
-        * [Accessing invalid memory](#accessing-invalid-memory)
-        * [Unhandled errors and exceptions](#unhandled-errors-and-exceptions)
-        * [Fixing someone else code](#fixing-someone-else-code)
-        * [Debugging a segmentation fault](#debugging-a-segmentation-fault)
-        * [Debugging a Python crash](#debugging-a-python-crash)
-        * [Debugging with print](#debugging-with-print)
-        * [Debugging with assert](#debugging-with-assert)
-        * [Try and catch debugging](#try-and-catch-debugging)
-        * [Python logging module](#python-logging-module)
-        * [Python debugging with pdb](#python-debugging-with-pdb)
-        * [Debugging/breakpoints in VS Code](#debuggingbreakpoints-in-vs-code)
-        * [AI infused debugging and paired programming](#ai-infused-debugging-and-paired-programming)
-        * [Resources for debugging crashes](#resources-for-debugging-crashes)
-    * [Handling Bigger incidents](#handling-bigger-incidents)
-        * [Crashes in complex systems](#crashes-in-complex-systems)
-        * [Communication and documentation during incidents](#communication-and-documentation-during-incidents)
-        * [Writing effective postmortems](#writing-effective-postmortems)
-    * [Review](#review-2)
-        * [Glossary : Course-4_Module-3](#glossary--course-4_module-3)
-        * [Qwiklab Assessment : Fix errors in Python scripts](#qwiklab-assessment--fix-errors-in-python-scripts)
+  * [Why Programs Crash](#why-programs-crash)
+    * [Introduction to Crashing Programs](#introduction-to-crashing-programs)
+    * [Systems that Crash](#systems-that-crash)
+    * [Understanding crashing applications](#understanding-crashing-applications)
+    * [What to do when you can't fix the program?](#what-to-do-when-you-cant-fix-the-program)
+    * [Internal server error](#internal-server-error)
+    * [Resources for understanding crashes](#resources-for-understanding-crashes)
+  * [Code that Crashes](#code-that-crashes)
+    * [Accessing invalid memory](#accessing-invalid-memory)
+    * [Unhandled errors and exceptions](#unhandled-errors-and-exceptions)
+    * [Fixing someone else code](#fixing-someone-else-code)
+    * [Debugging a segmentation fault](#debugging-a-segmentation-fault)
+    * [Debugging a Python crash](#debugging-a-python-crash)
+    * [Debugging with print](#debugging-with-print)
+    * [Debugging with assert](#debugging-with-assert)
+    * [Try and catch debugging](#try-and-catch-debugging)
+    * [Python logging module](#python-logging-module)
+    * [Python debugging with pdb](#python-debugging-with-pdb)
+    * [Debugging/breakpoints in VS Code](#debuggingbreakpoints-in-vs-code)
+    * [AI infused debugging and paired programming](#ai-infused-debugging-and-paired-programming)
+    * [Resources for debugging crashes](#resources-for-debugging-crashes)
+  * [Handling Bigger incidents](#handling-bigger-incidents)
+    * [Crashes in complex systems](#crashes-in-complex-systems)
+    * [Communication and documentation during incidents](#communication-and-documentation-during-incidents)
+    * [Writing effective postmortems](#writing-effective-postmortems)
+  * [Review](#review-2)
+    * [Glossary : Course-4_Module-3](#glossary--course-4_module-3)
+    * [Qwiklab Assessment : Fix errors in Python scripts](#qwiklab-assessment--fix-errors-in-python-scripts)
 * [MODULE 4 : Managing Resources](#module-4--managing-resources)
-    * [Managing computer resources](#managing-computer-resources)
-        * [Introduction on Managing Resources](#introduction-on-managing-resources)
-        * [Memory leaks and how to prevent them](#memory-leaks-and-how-to-prevent-them)
-        * [Managing disk space](#managing-disk-space)
-        * [Network saturation](#network-saturation)
-        * [Dealing with memory leaks](#dealing-with-memory-leaks)
-        * [More about managing resources](#more-about-managing-resources)
-    * [Managing our time](#managing-our-time)
-        * [Getting to the important tasks](#getting-to-the-important-tasks)
-        * [Prioritizing tasks](#prioritizing-tasks)
-        * [Estimating the Time tasks will take](#estimating-the-time-tasks-will-take)
-        * [Communicating expectations](#communicating-expectations)
-        * [More about making the best use of your time](#more-about-making-the-best-use-of-your-time)
-    * [Making our future live easier](#making-our-future-live-easier)
-        * [Dealing with Hard Problems](#dealing-with-hard-problems)
-        * [Proactive Practices](#proactive-practices)
-        * [Planning Future Resource Usage](#planning-future-resource-usage)
-        * [Change management in virtualized environments](#change-management-in-virtualized-environments)
-        * [Containerized Applications : Docker](#containerized-applications--docker)
-        * [Preventing Future Problems](#preventing-future-problems)
-        * [More about preventing future breakage](#more-about-preventing-future-breakage)
-    * [Review](#review-3)
-        * [Glossary : Course-4_Module-4](#glossary--course-4_module-4)
-        * [Qwiklab Assessment : Debug and Solve Software Problems](#qwiklab-assessment--debug-and-solve-software-problems)
-        * [IT skills in action](#it-skills-in-action)
-    * [Interviewing](#interviewing)
-        * [Getting interviews through networking](#getting-interviews-through-networking)
-        * [The interview process](#the-interview-process)
-        * [Interviewing at different type of companies](#interviewing-at-different-type-of-companies)
-        * [Developing an Elevator Pitch](#developing-an-elevator-pitch)
-        * [Asking the interviewer questions](#asking-the-interviewer-questions)
-        * [Answer questions with the STAR method](#answer-questions-with-the-star-method)
-        * [Interview warmup](#interview-warmup)
-        * [Negotiating the contract](#negotiating-the-contract)
-    * [Wrap up](#wrap-up)
-
+  * [Managing computer resources](#managing-computer-resources)
+    * [Introduction on Managing Resources](#introduction-on-managing-resources)
+    * [Memory leaks and how to prevent them](#memory-leaks-and-how-to-prevent-them)
+    * [Managing disk space](#managing-disk-space)
+    * [Network saturation](#network-saturation)
+    * [Dealing with memory leaks](#dealing-with-memory-leaks)
+    * [More about managing resources](#more-about-managing-resources)
+  * [Managing our time](#managing-our-time)
+    * [Getting to the important tasks](#getting-to-the-important-tasks)
+    * [Prioritizing tasks](#prioritizing-tasks)
+    * [Estimating the Time tasks will take](#estimating-the-time-tasks-will-take)
+    * [Communicating expectations](#communicating-expectations)
+    * [More about making the best use of your time](#more-about-making-the-best-use-of-your-time)
+  * [Making our future live easier](#making-our-future-live-easier)
+    * [Dealing with Hard Problems](#dealing-with-hard-problems)
+    * [Proactive Practices](#proactive-practices)
+    * [Planning Future Resource Usage](#planning-future-resource-usage)
+    * [Change management in virtualized environments](#change-management-in-virtualized-environments)
+    * [Containerized Applications : Docker](#containerized-applications--docker)
+    * [Preventing Future Problems](#preventing-future-problems)
+    * [More about preventing future breakage](#more-about-preventing-future-breakage)
+  * [Review](#review-3)
+    * [Glossary : Course-4_Module-4](#glossary--course-4_module-4)
+    * [Qwiklab Assessment : Debug and Solve Software Problems](#qwiklab-assessment--debug-and-solve-software-problems)
+    * [IT skills in action](#it-skills-in-action)
+  * [Interviewing](#interviewing)
+    * [Getting interviews through networking](#getting-interviews-through-networking)
+    * [The interview process](#the-interview-process)
+    * [Interviewing at different type of companies](#interviewing-at-different-type-of-companies)
+    * [Developing an Elevator Pitch](#developing-an-elevator-pitch)
+    * [Asking the interviewer questions](#asking-the-interviewer-questions)
+    * [Answer questions with the STAR method](#answer-questions-with-the-star-method)
+    * [Interview warmup](#interview-warmup)
+    * [Negotiating the contract](#negotiating-the-contract)
+  * [Wrap up](#wrap-up)
 <!-- TOC -->
 
 # MODULE 1 : Troubleshooting Concepts
@@ -585,7 +583,8 @@ hours to finish, which isn't efficient at all for a daily backup.
 - Dr.Memory can assist in finding out if invalid operations are occurring in a program running on Windows or Linux
 - Undefined behavior :
     - The code is doing something that's not valid in the programming language
-- Valgrind :
+- Valgrind : 
+    - For profiling C and C++ programs
     - A very powerful tool that can tell us if the code is doing any invalid operations, no matter if it crashes or not
     - Valgrind can assist in finding out if invalid operations are occurring in a program running on a Linux or macOS
       system
@@ -959,75 +958,3 @@ nano ~/data.csv
 python3 /usr/bin/infrastructure
 
 ```
-
-# MODULE 4 : Managing Resources
-
-## Managing computer resources
-
-### Introduction on Managing Resources
-
-### Memory leaks and how to prevent them
-
-### Managing disk space
-
-### Network saturation
-
-### Dealing with memory leaks
-
-### More about managing resources
-
-## Managing our time
-
-### Getting to the important tasks
-
-### Prioritizing tasks
-
-### Estimating the Time tasks will take
-
-### Communicating expectations
-
-### More about making the best use of your time
-
-## Making our future live easier
-
-### Dealing with Hard Problems
-
-### Proactive Practices
-
-### Planning Future Resource Usage
-
-### Change management in virtualized environments
-
-### Containerized Applications : Docker
-
-### Preventing Future Problems
-
-### More about preventing future breakage
-
-## Review
-
-### Glossary : Course-4_Module-4
-
-### Qwiklab Assessment : Debug and Solve Software Problems
-
-### IT skills in action
-
-## Interviewing
-
-### Getting interviews through networking
-
-### The interview process
-
-### Interviewing at different type of companies
-
-### Developing an Elevator Pitch
-
-### Asking the interviewer questions
-
-### Answer questions with the STAR method
-
-### Interview warmup
-
-### Negotiating the contract
-
-## Wrap up
